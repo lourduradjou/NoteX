@@ -33,6 +33,7 @@ export default function Analytics() {
         width={Dimensions.get("window").width - 30}
         height={220}
         yAxisLabel=""
+        yAxisSuffix=""
         chartConfig={chartConfig}
         bezier
         style={styles.chart}
@@ -78,8 +79,8 @@ const chartConfig = {
 
 // Styles
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 15, backgroundColor: "#f5f5f5" },
-  header: { fontSize: 24, fontWeight: "bold", textAlign: "center", marginBottom: 20 },
+  container: { flex: 1, padding: 15, backgroundColor: '#dad7cd' },
+  header: { fontSize: 24, fontWeight: "bold", textAlign: "center",backgroundColor: '#588157', marginBottom: 30 },
   chartTitle: { fontSize: 18, fontWeight: "bold", marginVertical: 10, textAlign: "center" },
   chart: { borderRadius: 10, marginVertical: 10 },
 });

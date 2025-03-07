@@ -15,8 +15,8 @@
     "content": "Analyze competitors' strengths and weaknesses.",
     "tags": "analysis, business",
     "cycle": true,
-    "deadlineDate": "2024-03-11",
-    "deadlineTime": "12:00 PM",
+    "deadlineDate": "2025-03-7",
+    "deadlineTime": "1:50 PM",
     "status": "In Progress"
   },
   {
@@ -25,7 +25,7 @@
     "content": "Draft initial design wireframes for approval.",
     "tags": "design, UX",
     "cycle": false,
-    "deadlineDate": "2024-03-12",
+    "deadlineDate": "2025-03-07",
     "deadlineTime": "07:00 PM",
     "status": "To-do"
   },

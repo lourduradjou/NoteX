@@ -10,10 +10,10 @@ const Login = () => {
       <Text style={styles.text}>Log In</Text>
       <TextInput style={styles.input} placeholder="Username" />
       <TextInput style={styles.input} placeholder="Password" secureTextEntry />
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => router.push('/(home)/Tasks')}>
         <Text style={styles.buttonText}>Log In</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => router.push('/(Welcome)/signup')}>
+      <TouchableOpacity onPress={() => router.push('/(auth)/Register')}>
         <Text style={styles.link}>Don't have an account? Sign up</Text>
       </TouchableOpacity>
     </View>

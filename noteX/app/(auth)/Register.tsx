@@ -11,10 +11,10 @@ const Register = () => {
       <TextInput style={styles.input} placeholder="Username" />
       <TextInput style={styles.input} placeholder="Email" keyboardType="email-address" />
       <TextInput style={styles.input} placeholder="Password" secureTextEntry />
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => router.push('/(home)/Tasks')}>
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => router.push('/(Welcome)/login')}>
+      <TouchableOpacity onPress={() => router.push('/(auth)/Login')}>
         <Text style={styles.link}>Already have an account? Log in</Text>
       </TouchableOpacity>
     </View>

@@ -7,7 +7,8 @@ export default function HomeLayout() {
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
-        tabBarStyle: { backgroundColor: "#fff", height: 60 },
+        tabBarStyle: { backgroundColor: "#fff", height: 60, alignContent: "center" },
+        tabBarActiveTintColor: '#588157',tabBarInactiveTintColor:'#dad7cd'
       }}
     >
       

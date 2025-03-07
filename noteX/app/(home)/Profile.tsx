@@ -6,7 +6,7 @@ import * as ImagePicker from "expo-image-picker";
 
 // Mock User Data
 const user = {
-  name: "John Doe",
+  name: "Balaji",
   email: "johndoe@example.com",
   role: "Project Manager",
   stats: [
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     flex: 1, 
     alignItems: "center", 
     paddingTop: 40,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: '#588157',
   },
 
   avatar: {
@@ -97,12 +97,12 @@ const styles = StyleSheet.create({
     borderRadius: 65,
     marginBottom: 25,
     borderWidth: 4,
-    borderColor: "#6c5ce7",
+    borderColor: '#ffff',
   },
 
-  name: { fontSize: 26, fontWeight: "bold", color: "#333" },
-  email: { fontSize: 18, color: "#666", marginBottom: 5 },
-  role: { fontSize: 18, color: "#6c5ce7", fontWeight: "bold", marginBottom: 25 },
+  name: { fontSize: 26, fontWeight: "bold", color: "#ffff" },
+  email: { fontSize: 18, color: "ffff", marginBottom: 5 },
+  role: { fontSize: 18, color: "#fff", fontWeight: "bold", marginBottom: 25 },
 
   statCard: {
     width: 350,
@@ -119,6 +119,6 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
   },
 
-  statNumber: { fontSize: 32, fontWeight: "bold", color: "#6c5ce7" },
+  statNumber: { fontSize: 32, fontWeight: "bold", color: '#588157' },
   statLabel: { fontSize: 18, color: "#333", marginTop: 8 },
 });

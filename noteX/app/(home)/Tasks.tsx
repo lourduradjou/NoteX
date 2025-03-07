@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import {View,  Text,  FlatList,  TouchableOpacity,  StyleSheet,  Modal,} from "react-native";
+import {View,  Text,  FlatList,  TouchableOpacity,  StyleSheet,  Modal, ScrollView,} from "react-native";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import taskData from "../data/data.json";
+import moment from "moment";
+import { useFonts } from "expo-font";
+
 import TaskForm from "../components/TasksForm"; // Import the form component
 
 export default function Tasks() {
@@ -9,6 +12,9 @@ export default function Tasks() {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null); // Store selected task for editing
   const [tasks, setTasks] = useState(taskData);
+  const [fontsLoaded] = useFonts({
+    'DancingScript-SemiBold': require('../assets/fonts/DancingScript-SemiBold.ttf'),
+  });
 
   // Extract unique tags from data
   const allTags = [
@@ -24,6 +30,24 @@ export default function Tasks() {
   const editTask = (task) => {
     setSelectedTask(task); // Store selected task
     setModalVisible(true); // Open modal
+  };
+  const getDeadlineColor = (deadlineDate, deadlineTime) => {
+    // Parse the deadline properly
+    const deadline = moment(`${deadlineDate} ${deadlineTime}`, "YYYY-MM-DD hh:mm A"); // Assuming the time might be in 12-hour format
+  
+    if (!deadline.isValid()) {
+      console.warn("Invalid deadline format:", deadlineDate, deadlineTime);
+      return "black"; // Default color in case of an error
+    }
+  
+    const now = moment();
+    const diffMinutes = deadline.diff(now, "minutes"); // Get the difference in minutes
+  
+    console.log(`Deadline: ${deadline.format()}, Now: ${now.format()}, Diff: ${diffMinutes} min`);
+  
+    if (diffMinutes <= 10) return "red";      // Less than 10 mins left → RED
+    if (diffMinutes <= 20) return "orange";   // 10-20 mins left → YELLOW
+    return "green";                           // More than 20 mins left → GREEN
   };
 
   // Save or update task
@@ -51,11 +75,13 @@ export default function Tasks() {
 
   return (
     <View style={styles.container}>
+      
+      <Text style={styles.header}>My Tasks</Text>
       {/* Filter Section */}
       <View style={styles.filterContainer}>
         <Text style={styles.sectionTitle}>Filter by Tags</Text>
-        <View style={styles.tabs}>
-          {allTags.map((tag) => (
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.tabs}>
+        {allTags.map((tag) => (
             <TouchableOpacity
               key={tag}
               onPress={() => setFilter(tag)}
@@ -68,7 +94,7 @@ export default function Tasks() {
               </Text>
             </TouchableOpacity>
           ))}
-        </View>
+  </ScrollView>
       </View>
 
       {/* Task List */}
@@ -91,9 +117,14 @@ export default function Tasks() {
 </View>
 
                 
-                <Text style={styles.taskTime}>
-                  📅 {item.deadlineDate} | ⏰ {item.deadlineTime}
-                </Text>
+<Text
+  style={[
+    styles.taskTime,
+    { color: getDeadlineColor(item.deadlineDate, item.deadlineTime) },
+  ]}
+>
+  📅 {item.deadlineDate} | ⏰ {item.deadlineTime}
+</Text>
                 <Text style={styles.taskCycle}>
                   🔄 {item.cycle ? "Recurring Task" : "One-time Task"}
                 </Text>
@@ -147,14 +178,24 @@ export default function Tasks() {
 
 // Styles
 const styles = StyleSheet.create({
+
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: '#344e41',
   },
+  header: {
+    fontFamily: "DancingScript-SemiBold", // Using the custom font
+    fontSize: 26,
+    textAlign: "center",
+    color: "#ffff",
+    marginBottom: 20,
+  },
+  
 
   // Filter Section
   filterContainer: {
+    
     backgroundColor: "#fff",
     padding: 15,
     borderRadius: 12,
@@ -177,6 +218,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start",
     gap: 8,
+    paddingHorizontal: 5,
   },
 
   tab: {
@@ -187,7 +229,7 @@ const styles = StyleSheet.create({
   },
 
   activeTab: {
-    backgroundColor: "#6c5ce7",
+    backgroundColor: '#588157',
   },
 
   tabText: {
@@ -202,119 +244,121 @@ const styles = StyleSheet.create({
   },
 
   // Task Cards
-  taskCard: {
-    backgroundColor: "#fff",
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 10,
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 3,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    width: "100%",
-  },
+ // Task Cards
+ taskCard: {
+  backgroundColor:'#dad7cd' ,
+  padding: 15,
+  borderRadius: 10,
+  marginBottom: 10,
+  shadowColor: '#000',
+  shadowOpacity: 0.1,
+  shadowRadius: 5,
+  elevation: 3,
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  width: '100%',
+},
 
-  taskInfo: {
-    flex: 1,
-    
-  },
+taskInfo: {
+  flex: 1,
+},
 
-  flatListContent: {
-    paddingBottom: 80,
-    width: "100%",
-  },
+flatListContent: {
+  paddingBottom: 80,
+  width: '100%',
+},
 
-  taskTitle: {
-    fontSize: 16,
-    fontWeight: "bold",color: "#6c5ce7",
-  },
+taskTitle: {
+  fontSize: 16,
+  fontWeight: 'bold',
+  color: '#3a5a40',
+},
 
-  taskContent: {
-    color: "#444",
-    marginTop: 5,
-  },
+taskContent: {
+  color: '#588157',
+  marginTop: 5,
+},
 
-  tagsContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 5,
-    marginTop: 5,
-  },
-  
-  tag: {
-    borderWidth: 1,
-    borderColor: "#6c5ae7",
-    borderRadius: 8,
-    paddingVertical: 2,
-    paddingHorizontal: 10,
-  },
-  
-  tagText: {
-    color: "#6c5ce7",
-    fontSize: 14,
-    fontWeight: "600",
-  },
-  
+tagsContainer: {
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  gap: 5,
+  marginTop: 5,
+},
 
-  taskTime: {
-    color: "#666",
-    marginTop: 5,
-  },
+tag: {
+  borderWidth: 1,
+  borderColor: '#344e41',
+  borderRadius: 8,
+  paddingVertical: 2,
+  paddingHorizontal: 10,
+},
 
-  taskCycle: {
-    color: "#333",
-    marginTop: 5,
-    fontWeight: "600",
-  },
+tagText: {
+  color: '#588157',
+  fontSize: 14,
+  fontWeight: '600',
+},
 
-  status: {
-    marginTop: 5,
-    fontWeight: "bold",
-  },
+taskTime: {
+  color: '#666',
+  marginTop: 5,
+},
 
-  // Status Colors
-  completed: {
-    color: "green",
-  },
-  inprogress: {
-    color: "orange",
-  },
-  todo: {
-    color: "blue",
-  },
+taskCycle: {
+  color: '#333',
+  marginTop: 5,
+  fontWeight: '600',
+},
 
-  // Edit & Delete Icon Container
-  iconContainer: {
-    flexDirection: "row",
-    gap: 15,
-  },
+status: {
+  marginTop: 5,
+  fontWeight: 'bold',
+},
 
-  // Floating Button
-  addButton: {
-    position: "absolute",
-    right: 20,
-    bottom: 80,
-    backgroundColor: "#6c5ce7",
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    justifyContent: "center",
-    alignItems: "center",
-    elevation: 6,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.5,
-  },
+// Status Colors
+completed: {
+  color: 'green',
+},
+inprogress: {
+  color: 'orange',
+},
+todo: {
+  color: 'blue',
+},
 
-  addButtonText: {
-    color: "#fff",
-    fontSize: 30,
-    fontWeight: "bold",
-  },
+// Edit & Delete Icon Container
+iconContainer: {
+  flexDirection: 'row',
+  gap: 15,
+},
+
+// Floating Button
+addButton: {
+  position: 'absolute',
+  right: 30,
+  bottom: 50,
+  backgroundColor: '#344e41',
+  width: 60,
+  height: 60,
+  borderRadius: 30,
+  justifyContent: 'center',
+  alignItems: 'center',
+  elevation: 6,
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.25,
+  shadowRadius: 3.5,
+},
+
+addButtonText: {
+  color: '#fff',
+  fontSize: 30,
+  fontWeight: 'bold',
+},
 });
 
+
+// Removed the local declaration of useFonts to resolve the conflict with the import
 
