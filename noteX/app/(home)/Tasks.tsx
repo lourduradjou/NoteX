@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  StyleSheet,
-  Modal,
-} from "react-native";
+import {View,  Text,  FlatList,  TouchableOpacity,  StyleSheet,  Modal,} from "react-native";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import taskData from "../data/data.json";
 import TaskForm from "../components/TasksForm"; // Import the form component
@@ -182,7 +175,6 @@ const styles = StyleSheet.create({
   // Tabs
   tabs: {
     flexDirection: "row",
-    flexWrap: "wrap",
     justifyContent: "flex-start",
     gap: 8,
   },
@@ -254,7 +246,7 @@ const styles = StyleSheet.create({
   
   tag: {
     borderWidth: 1,
-    borderColor: "#6c5ce7",
+    borderColor: "#6c5ae7",
     borderRadius: 8,
     paddingVertical: 2,
     paddingHorizontal: 10,
