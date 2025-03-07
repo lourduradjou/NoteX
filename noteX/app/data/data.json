@@ -1,27 +1,42 @@
 [
-    {
-      "id": 1,
-      "title": "Market Research",
-      "time": "10:00 AM",
-      "status": "Completed"
-    },
-    {
-      "id": 2,
-      "title": "Competitive Analysis",
-      "time": "12:00 PM",
-      "status": "In Progress"
-    },
-    {
-      "id": 3,
-      "title": "Create Low-fidelity Wireframe",
-      "time": "07:00 PM",
-      "status": "To-do"
-    },
-    {
-      "id": 4,
-      "title": "How to pitch a Design Sprint",
-      "time": "09:00 PM",
-      "status": "To-do"
-    }
-  ]
-  
+  {
+    "id": 1,
+    "title": "Market Research",
+    "content": "Gather insights on market trends.",
+    "tags": "research, strategy",
+    "cycle": false,
+    "deadlineDate": "2024-03-10",
+    "deadlineTime": "10:00 AM",
+    "status": "Completed"
+  },
+  {
+    "id": 2,
+    "title": "Competitive Analysis",
+    "content": "Analyze competitors' strengths and weaknesses.",
+    "tags": "analysis, business",
+    "cycle": true,
+    "deadlineDate": "2024-03-11",
+    "deadlineTime": "12:00 PM",
+    "status": "In Progress"
+  },
+  {
+    "id": 3,
+    "title": "Create Low-fidelity Wireframe",
+    "content": "Draft initial design wireframes for approval.",
+    "tags": "design, UX",
+    "cycle": false,
+    "deadlineDate": "2024-03-12",
+    "deadlineTime": "07:00 PM",
+    "status": "To-do"
+  },
+  {
+    "id": 4,
+    "title": "How to pitch a Design Sprint",
+    "content": "Prepare and practice a pitch for a design sprint.",
+    "tags": "presentation, strategy",
+    "cycle": false,
+    "deadlineDate": "2024-03-13",
+    "deadlineTime": "09:00 PM",
+    "status": "To-do"
+  }
+]
